@@ -7,11 +7,21 @@
           Find inverse of an integer x under modulo m
         </v-card-title>
         <v-card-text>
-          <v-text-field label="Integer x: " v-model="x" @input="reset" />
-          <v-text-field label="Modulo m: " v-model="m" @input="reset" />
+          <v-text-field
+            label="Integer x: "
+            v-model="x"
+            @input="reset"
+            @keyup.enter="calculateInverse"
+          />
+          <v-text-field
+            label="Modulo m: "
+            v-model="m"
+            @input="reset"
+            @keyup.enter="calculateInverse"
+          />
           <div class="text-center">
             <div class="text-h6" v-if="result">
-              <v-alert type="success">
+              <v-alert type="info" color="blue">
                 {{ result }}
               </v-alert>
             </div>
@@ -53,6 +63,7 @@ export default {
   },
   methods: {
     calculateInverse() {
+      if (!this.x || !this.m) return;
       this.error = "";
       this.result = null;
       let x = this.x;
@@ -68,9 +79,6 @@ export default {
         }
       }
       return (this.error = `${this.x} has no multiplicative inverse under modulo ${this.m}`);
-    },
-    log() {
-      console.log(this.$data);
     },
     reset() {
       this.error = "";

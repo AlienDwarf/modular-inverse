@@ -16,7 +16,9 @@
       :absolute="!fixed"
       app
     >
-      <span>&copy; {{ new Date().getFullYear() }}</span>
+      <span>{{ new Date().toLocaleDateString() }}</span>
+      <v-spacer />
+      <span>{{ time }}</span>
     </v-footer>
   </v-app>
 </template>
@@ -25,6 +27,7 @@
 export default {
   data () {
     return {
+      time: new Date().toLocaleTimeString(),
       clipped: false,
       drawer: false,
       fixed: false,
@@ -45,6 +48,11 @@ export default {
       rightDrawer: false,
       title: 'Modular Inverse Finder'
     }
+  },
+  mounted() {
+    setInterval(() => {
+      return this.time = new Date().toLocaleTimeString();
+    }, 1000);
   }
 }
 </script>
